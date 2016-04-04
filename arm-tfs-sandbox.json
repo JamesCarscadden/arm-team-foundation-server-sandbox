@@ -60,7 +60,7 @@
     "wadcfgxstart": "[concat(variables('wadlogs'), variables('wadperfcounters1'), variables('wadperfcounters2'), '<Metrics resourceId=\"')]",
     "wadmetricsresourceid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', variables('diagnosticsStorageAccountResourceGroup'), '/providers/', 'Microsoft.Compute/virtualMachines/', parameters('vmName'))]",
     "wadcfgxend": "\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>",
-    "tfsinstallloc": "https://raw.githubusercontent.com/JamesCarscadden/team-foundation-server-test-vm/master/",
+    "tfsinstallloc": "https://raw.githubusercontent.com/JamesCarscadden/arm-team-foundation-server-sandbox/master/",
     "tfsbootstrapfile": "start.ps1",
     "tfspsexecfile": "PsExec.exe",
     "tfsbootstrapuri": "[concat(variables('tfsinstallloc'), variables('tfsbootstrapfile'))]",
