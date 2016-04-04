@@ -10,7 +10,7 @@ Param(
 )
 
 # Delay for 5 minutes to allow VM installation to complete?
-Start-Delay -s 300
+Start-Sleep -s 300
 
 # Installs TFS 2015 update 1 using a default "Standard" configuration.
 
@@ -29,7 +29,7 @@ Invoke-WebRequest -Uri $tfs_url -OutFile $output
 Start-Process -Wait -FilePath "c:\temp\tfs_server.exe" -ArgumentList "/quiet" -NoNewWindow
 
 # Delay again, to make sure that the installation is complete
-Start-Delay -s 150
+Start-Sleep -s 150
 
 # Configure TFS using default options
 .\PsExec.exe -accepteula -h -u $theUsername -p $thePassword `
