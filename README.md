@@ -7,7 +7,7 @@
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template will install a simple server with a default installation of Team Foundation Server 2015 Update 2. This is suitable for sandbox usage or experimentation.
+This template will install a simple server with a default installation of Team Foundation Server 2015 Update 3. This is suitable for sandbox usage or experimentation.
 
 Some limitations:
 

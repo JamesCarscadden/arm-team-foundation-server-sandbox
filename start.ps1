@@ -12,7 +12,7 @@ Param(
 # Delay for 5 minutes to allow VM installation to complete?
 Start-Sleep -s 300
 
-# Installs TFS 2015 update 1 using a default "Standard" configuration.
+# Installs TFS 2015 update 3 using a default "Standard" configuration.
 
 $tfs_url = "http://go.microsoft.com/fwlink/?LinkId=615439"
 $output = "c:\temp\tfs_server.exe"
