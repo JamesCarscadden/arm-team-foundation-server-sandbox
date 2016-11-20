@@ -33,9 +33,9 @@
   "variables": {
     "apiVersion": "2015-06-15",
     "imagePublisher": "MicrosoftSQLServer",
-    "imageOffer": "SQL2014SP1-WS2012R2",
+    "imageOffer": "SQL2016SP1-WS2016",
     "sqlSKU": "Enterprise",
-    "sqlVersion": "12.0.4100",
+    "sqlVersion": "13.0.400110",
     "OSDiskName": "TFSosdisk",
     "nicName": "TFSVMNic",
     "addressPrefix": "10.0.0.0/16",

@@ -14,7 +14,8 @@ Start-Sleep -s 300
 
 # Installs TFS 2015 update 3 using a default "Standard" configuration.
 
-$tfs_url = "http://go.microsoft.com/fwlink/?LinkId=615439"
+#$tfs_url = "http://go.microsoft.com/fwlink/?LinkId=615439"  # TFS 2015.3
+$tfs_url = "https://go.microsoft.com/fwlink/?LinkId=831912"  # TFS 2017
 $output = "c:\temp\tfs_server.exe"
 
 If (-Not(Test-Path "c:\temp"))
@@ -33,7 +34,7 @@ Start-Sleep -s 150
 
 # Configure TFS using default options
 .\PsExec.exe -accepteula -h -u $theUsername -p $thePassword `
-"C:\Program Files\Microsoft Team Foundation Server 14.0\Tools\tfsconfig.exe" `
+"C:\Program Files\Microsoft Team Foundation Server 15.0\Tools\tfsconfig.exe" `
 unattend /configure /type:standard
 
 # Allow public through firewall
