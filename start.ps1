@@ -30,7 +30,7 @@ Invoke-WebRequest -Uri $tfs_url -OutFile $output
 Start-Process -Wait -FilePath "c:\temp\tfs_server.exe" -ArgumentList "/quiet" -NoNewWindow
 
 # Delay again, to make sure that the installation is complete
-Start-Sleep -s 150
+Start-Sleep -s 300
 
 # Configure TFS using default options
 .\PsExec.exe -accepteula -h -u $theUsername -p $thePassword `
