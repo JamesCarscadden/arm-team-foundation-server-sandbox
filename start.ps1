@@ -33,7 +33,7 @@ Start-Process -Wait -FilePath "c:\temp\tfs_server.exe" -ArgumentList "/quiet" -N
 Start-Sleep -s 300
 
 # Configure TFS using default options
-.\PsExec.exe -accepteula -h -u $theUsername -p $thePassword `
+.\PsExec.exe \\localhost -accepteula -h -u $theUsername -p $thePassword `
 "C:\Program Files\Microsoft Team Foundation Server 15.0\Tools\tfsconfig.exe" `
 unattend /configure /type:standard
 
