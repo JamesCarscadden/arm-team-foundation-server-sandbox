@@ -15,7 +15,8 @@ Start-Sleep -s 300
 # Installs TFS 2015 update 3 using a default "Standard" configuration.
 
 #$tfs_url = "http://go.microsoft.com/fwlink/?LinkId=615439"  # TFS 2015.3
-$tfs_url = "https://go.microsoft.com/fwlink/?LinkId=831912"  # TFS 2017
+#$tfs_url = "https://go.microsoft.com/fwlink/?LinkId=831912"  # TFS 2017
+$tfs_url = "https://go.microsoft.com/fwlink/?LinkId=857134"  # TFS 2017.3
 $output = "c:\temp\tfs_server.exe"
 
 If (-Not(Test-Path "c:\temp"))
