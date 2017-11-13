@@ -31,7 +31,6 @@
     }
   },
   "variables": {
-    "apiVersion": "2015-06-15",
     "imagePublisher": "MicrosoftSQLServer",
     "imageOffer": "SQL2016SP1-WS2016",
     "sqlSKU": "Enterprise",
@@ -79,8 +78,12 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('vhdStorageName')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
+      "kind": "Storage",
+      "sku": {
+        "name": "Premium_LRS"
+      },
       "tags": {
         "displayName": "VHDStorage"
       },
@@ -91,8 +94,12 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('diagnosticsStorageAccountName')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
+      "kind": "Storage",
+      "sku": {
+        "name": "Standard_LRS"
+      },
       "tags": {
         "displayName": "DiagnosticsStorage"
       },
@@ -101,7 +108,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
       "location": "[resourceGroup().location]",
@@ -116,7 +123,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('networkSecurityGroupName')]",
       "location": "[resourceGroup().location]",
@@ -154,7 +161,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[resourceGroup().location]",
@@ -178,7 +185,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[resourceGroup().location]",
@@ -211,7 +218,7 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[resourceGroup().location]",
@@ -246,18 +253,18 @@
             "name": "osdisk",
             "createOption": "FromImage",
             "vhd": {
-              "uri": "[concat(concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageName')), variables('apiVersion')).primaryEndpoints['blob'], 'vhds/'), variables('OSDiskName'), '.vhd')]"
+              "uri": "[concat(concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageName')), '2017-03-30').primaryEndpoints['blob'], 'vhds/'), variables('OSDiskName'), '.vhd')]"
             }
           },
           "dataDisks": [
             {
               "name": "datadisk-1",
-              "createOption": "empty",
+              "createOption": "Empty",
               "lun": 0,
-              "diskSizeGB": "1023",
+              "diskSizeGB": 1023,
               "caching": "ReadOnly",
               "vhd": {
-                "uri": "[concat(concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageName')), variables('apiVersion')).primaryEndpoints['blob'], 'vhds/'), variables('OSDiskName'), '-data-disk-1', '.vhd')]"
+                "uri": "[concat(concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageName')), '2017-03-30').primaryEndpoints['blob'], 'vhds/'), variables('OSDiskName'), '-data-disk-1', '.vhd')]"
               }
             }
           ]
@@ -272,7 +279,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": true,
-            "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticsStorageAccountName')), variables('apiVersion')).primaryEndpoints['blob']]"
+            "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts', variables('diagnosticsStorageAccountName')), '2017-03-30').primaryEndpoints['blob']]"
           }
         }
       }
@@ -280,7 +287,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/', 'Microsoft.Insights.VMDiagnosticsSettings')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-03-30",
       "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "AzureDiagnostics"
@@ -307,7 +314,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/', 'SqlIaasExtension')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-03-30",
       "location": "[resourceGroup().location]",
       "tags": {
         "displayName": "SQLManagement"
@@ -361,7 +368,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('vmName'),'/', 'installTFS')]",
-      "apiVersion": "[variables('apiVersion')]",
+      "apiVersion": "2017-03-30",
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
@@ -378,5 +385,11 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "tfsURL": {
+      "value": "[parameters('dnsNameForPublicIP')]",
+      "type": "string"
+    }
+  }
 }
